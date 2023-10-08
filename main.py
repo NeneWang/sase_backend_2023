@@ -34,17 +34,16 @@ def get_db():
 
 
 
-userRoutes = SQLAlchemyCRUDRouter(
-    schema=models.ViewUser,
-    db_model=models.User,
-    prefix=models.User.__tablename__,
-    create_schema=models.CreateUser,
-    update_schema=models.CreateUser,
+# userRoutes = SQLAlchemyCRUDRouter(
+#     schema=models.ViewUser,
+#     db_model=models.User,
+#     prefix=models.User.__tablename__,
+#     create_schema=models.CreateUser,
+#     update_schema=models.CreateUser,
+#     db=get_db
+# )
 
-    db=get_db
-)
-
-app.include_router(userRoutes)
+# app.include_router(userRoutes)
 
 @app.get("/docs", include_in_schema=False)
 async def swagger_ui_html():

@@ -45,6 +45,7 @@ class CreateUser(BaseModel):
         orm_mode = True
 
 class ViewUser(BaseModel):
+    id: int
     username: str
     email: str
     tags: List[str]
@@ -79,11 +80,24 @@ class CreateForum(BaseModel):
     user_id: int
     tags: List[str]
 
+
+class CreateForumEmail(BaseModel):
+    title: str
+    body: str
+    email: str
+
+
 class CreateComment(BaseModel):
     body: str
     title: str
     user_id: int
     parent_id: int
-    tags: List[str]
+
+
+class CreateCommentWithEmail(BaseModel):
+    body: str
+    title: str
+    email: str
+    parent_id: int
 
 

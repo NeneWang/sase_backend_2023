@@ -16,9 +16,26 @@ router = APIRouter(
 )
 
 
+@router.post("/get_create_user", status_code=200)
+def getOrCreateUser(email:str):
+    user = db.query(models.User).filter(models.User.email == email).first()
+    if user:
+        return user
+    else:
+        new_user = models.User(
+            email=email,
+            last_active=datetime.now()
+        )
+        db.add(new_user)
+        db.commit()
+        db.refresh(new_user)
+        return new_user
+
+
 @router.get("/", status_code=200)
 async def getForums(string_filter: Optional[str] = Query(None)):
-    if string_filter == "":
+    print("String filter", string_filter)
+    if string_filter == "" or string_filter == None:
         forums = db.query(models.Thread).all()
         return forums
     forums = db.query(models.Thread).filter(
@@ -30,14 +47,17 @@ async def getForums(string_filter: Optional[str] = Query(None)):
     return forums
 
 @router.post('/', status_code=201)
-def createForum(forum: models.CreateForum):
+def createForum(forum: models.CreateCommentWithEmail):
+
+    user = getOrCreateUser(forum.email)
+
     new_forum = models.Thread(
         is_forum=True,
         title=forum.title,
         body=forum.body,
-        user_id=forum.user_id,
+        user_id=user.id,
         created_time=datetime.now(),
-        tags=forum.tags
+        tags=[]
     )
     db.add(new_forum)
     db.commit()
@@ -79,20 +99,23 @@ def getForum(forum_id: int):
 
 
 @router.post("/comments", status_code=201)
-def createComment(comment: models.CreateComment):
+def createComment(comment: models.CreateCommentWithEmail):
     """Creates a comment on a forum or thread
 
     Args:
         forum_id (int): The id of the forum or thread
 
     """
+
+    user = getOrCreateUser(comment.email)
+
     new_comment = models.Thread(
         is_forum=False,
         body=comment.body,
-        user_id=comment.user_id,
+        user_id=user.email,
         parent_id=comment.parent_id,
         created_time=datetime.now(),
-        tags=comment.tags
+        tags=[]
     )
     db.add(new_comment)
     db.commit()

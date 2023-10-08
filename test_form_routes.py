@@ -28,13 +28,16 @@ def test_create_forums():
         json=user
     )
 
+    user = response.json()
+    print(user)
+
 
     response = client.post(
         "/forum/",
         json={
             "title": "Test forum",
             "body": "Test body",
-            "user_id": 1,
+            "user_id": user.id,
             "tags": ["test", "forum"]
         }
     )
