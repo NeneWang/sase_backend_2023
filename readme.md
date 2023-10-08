@@ -17,6 +17,7 @@ uvicorn main:app --reload
 git pull
 git add --all
 git commit -m "I made some changes"
+git push origin HEAD
 
 ```
 
