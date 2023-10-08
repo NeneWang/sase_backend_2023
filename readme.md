@@ -12,9 +12,12 @@ uvicorn main:app --reload
 ```
 
 
-
+## Github Management Reminder
 ```
 git pull
+git add --all
+git commit -m "I made some changes"
+
 ```
 
 To remove all errors make sure you configure the venv on visual code
