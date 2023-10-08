@@ -43,6 +43,7 @@ class Thread(Base):
     body = Column(String, nullable=False)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     created_time = Column(DateTime, nullable=False)
+    tags = Column(ARRAY(String))
 
     # Define a relationship with the User model
     user = relationship("users", back_populates="threads")

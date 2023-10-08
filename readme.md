@@ -7,6 +7,8 @@ On Mac:
 python3 -m venv sase_env
 source sase_env/bin/activate
 pip3 install -r requirements.txt
+
+uvicorn main:app --reload
 ```
 
 
