@@ -6,6 +6,7 @@ from sqlalchemy.dialects.postgresql import UUID
 import datetime, uuid
 import shortuuid
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.sql import func
 from database import Base
 from sqlalchemy import func
 
@@ -39,16 +40,21 @@ class Thread(Base):
     __tablename__ = 'threads'
 
     thread_id = Column(Integer, primary_key=True, autoincrement=True)
-    guid = Column(String, nullable=False)
+    parent_id = Column(Integer, ForeignKey('threads.thread_id'), nullable=True)
+    is_forum = Column(Boolean, nullable=False)
+    guid = Column(String, nullable=False, server_default=func.get_random_guid())
     body = Column(String, nullable=False)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     created_time = Column(DateTime, nullable=False)
-    tags = Column(ARRAY(String))
+    tags = Column(ARRAY(String), nullable=False)
 
     # Define a relationship with the User model
     user = relationship("users", back_populates="threads")
 
 
-    
+class CreateForum(BaseModel):
+    body: str
+    user_id: int
+    tags: List[str]
 
 

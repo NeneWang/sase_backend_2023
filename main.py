@@ -1,20 +1,20 @@
 import uvicorn
 from fastapi import FastAPI, Depends, File, UploadFile, Path, status, BackgroundTasks, HTTPException
 
-# from http.client import HTTPException
+
 from fastapi.encoders import jsonable_encoder
 from fastapi.middleware.cors import CORSMiddleware
 from database import SessionLocal, engine
 import models
 import os, json
-from routes import utils, api
-
-
-
 from sqlalchemy.ext.declarative import declarative_base
 from fastapi_crudrouter import SQLAlchemyCRUDRouter
-
 from fastapi.openapi.docs import get_swagger_ui_html
+
+from routes import utils, api, forumRoutes
+
+
+
 
 
 dotusername = os.getenv("USER")
@@ -55,6 +55,7 @@ app.add_middleware(
 
 app.include_router(utils.router)
 app.include_router(api.router)
+app.include_router(forumRoutes.router)
 
 models.Base.metadata.create_all(bind=engine)
 
