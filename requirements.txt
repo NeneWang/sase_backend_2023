@@ -11,7 +11,7 @@ python-multipart
 boto3
 python-dotenv
 tk
-fastapi-crudrouter==0.8.5   s
+fastapi-crudrouter==0.8.5
 passlib
 bcrypt
 shortuuid

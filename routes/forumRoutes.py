@@ -112,10 +112,11 @@ def createComment(comment: models.CreateCommentWithEmail):
     new_comment = models.Thread(
         is_forum=False,
         body=comment.body,
-        user_id=user.email,
+        user_id=user.id,
+        title=comment.title,
         parent_id=comment.parent_id,
-        created_time=datetime.now(),
-        tags=[]
+        tags=[],
+        created_time=datetime.now()
     )
     db.add(new_comment)
     db.commit()

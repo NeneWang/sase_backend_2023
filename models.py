@@ -69,7 +69,7 @@ class Thread(Base):
     title = Column(String, nullable=False)
     body = Column(String, nullable=False)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
-    created_time = Column(DateTime, nullable=False)
+    created_time = Column(DateTime, nullable=False, default=datetime.datetime.utcnow)
     tags = Column(ARRAY(String), nullable=False)
 
 
