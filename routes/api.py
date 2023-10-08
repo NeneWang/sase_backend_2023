@@ -2,11 +2,8 @@
 from fastapi import APIRouter, Query
 from datetime import datetime
 from sqlalchemy import or_
-from database import SessionLocal
 import random
 
-
-db = SessionLocal()
 
 
 router = APIRouter(
@@ -281,9 +278,11 @@ def getMeme():
         "preview": "https://imgflip.com/gif/7wkl4t"
         }
         ]
+def chosen_meme():
+    random_meme = random.choice(getMeme())
+    return(chosen_meme)
 
-random_meme= random.choice(getMeme)
-print(random_meme)
+print(chosen_meme)
 
 
 
