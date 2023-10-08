@@ -21,8 +21,8 @@ dotusername = os.getenv("USER")
 
 app = FastAPI(
     docs_url=None,
-    title="DD API",
-    description='Bla description',
+    title="Sase Project",
+    description='API for SASE Hackathon',
     )
 
 @app.get("/docs", include_in_schema=False)
@@ -60,7 +60,7 @@ models.Base.metadata.create_all(bind=engine)
 
 @app.get("/")
 def index():
-    return { "message": "hello world This is the Another update version"}
+    return { "message": "Welcome to api"}
 
 if __name__ == "__main__":
     uvicorn.run(app, port=8080, host='0.0.0.0')

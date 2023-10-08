@@ -19,7 +19,6 @@ git pull
 git add --all
 git commit -m "I made some changes"
 git push origin HEAD
-
 ```
 
 To remove all errors make sure you configure the venv on visual code
