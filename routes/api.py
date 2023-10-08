@@ -18,6 +18,16 @@ router = APIRouter(
 async def root():
     return {"message": "Welcome to API"}
 
+@router.get("/getMeme", status_code=200)
+def getMeme():
+    return {
+        "title": "Made a meal out of it",
+        "url": "https://i.redd.it/84uhwvgmmrsb1.gif",
+        "preview": [
+            "https://preview.redd.it/84uhwvgmmrsb1.gif?width=640&crop=smart&format=png8&s=c12d2e21057a6e7f9868762943c093ea17eba207"
+        ]
+        }
+
 
 
 
