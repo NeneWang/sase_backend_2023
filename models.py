@@ -57,4 +57,10 @@ class CreateForum(BaseModel):
     user_id: int
     tags: List[str]
 
+class CreateComment(BaseModel):
+    body: str
+    user_id: int
+    parent_id: int
+    tags: List[str]
+
 

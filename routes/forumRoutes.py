@@ -78,8 +78,8 @@ def getForum(forum_id: int):
     return forum_data
 
 
-@router.post("/{forum_id}", status_code=201)
-def createComment(forum_id: int, forum: models.CreateForum):
+@router.post("/comments", status_code=201)
+def createComment(comment: models.CreateComment):
     """Creates a comment on a forum or thread
 
     Args:
@@ -88,16 +88,16 @@ def createComment(forum_id: int, forum: models.CreateForum):
     """
     new_comment = models.Thread(
         is_forum=False,
-        body=forum.body,
-        user_id=forum.user_id,
+        body=comment.body,
+        user_id=comment.user_id,
+        parent_id=comment.parent_id,
         created_time=datetime.now(),
-        tags=forum.tags
+        tags=comment.tags
     )
     db.add(new_comment)
     db.commit()
     db.refresh(new_comment)
     return new_comment
-    
 
 
 
