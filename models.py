@@ -25,13 +25,35 @@ class User(Base):
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    guid = Column(String, nullable=False)
-    username = Column(String, nullable=False)
-    password = Column(String, nullable=False)
+    guid = Column(String, nullable=False, server_default=func.gen_random_uuid())
+    username = Column(String, nullable=True)
+    password = Column(String, nullable=True)
     email = Column(String, nullable=False)
     tags = Column(ARRAY(String))
     languages = Column(ARRAY(String))
     last_active = Column(DateTime, default=func.now(), nullable=False)
+
+
+
+class CreateUser(BaseModel):
+    username: str
+    email: str
+    tags: List[str]
+    languages: List[str]
+
+    class Config:
+        orm_mode = True
+
+class ViewUser(BaseModel):
+    username: str
+    email: str
+    tags: List[str]
+    languages: List[str]
+    last_active: datetime.datetime
+
+    class Config:
+        orm_mode = True
+
 
 
 
@@ -42,7 +64,8 @@ class Thread(Base):
     thread_id = Column(Integer, primary_key=True, autoincrement=True)
     parent_id = Column(Integer, ForeignKey('threads.thread_id'), nullable=True)
     is_forum = Column(Boolean, nullable=False)
-    guid = Column(String, nullable=False, server_default=func.get_random_guid())
+    guid = Column(String, nullable=False, server_default=func.gen_random_uuid())
+    title = Column(String, nullable=False)
     body = Column(String, nullable=False)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     created_time = Column(DateTime, nullable=False)
@@ -53,12 +76,14 @@ class Thread(Base):
 
 
 class CreateForum(BaseModel):
+    title: str
     body: str
     user_id: int
     tags: List[str]
 
 class CreateComment(BaseModel):
     body: str
+    title: str
     user_id: int
     parent_id: int
     tags: List[str]

@@ -16,22 +16,11 @@ from routes import utils, api, forumRoutes
 
 
 
-
-dotusername = os.getenv("USER")
-
 app = FastAPI(
     docs_url=None,
     title="Sase Project",
     description='API for SASE Hackathon',
     )
-
-@app.get("/docs", include_in_schema=False)
-async def swagger_ui_html():
-    return get_swagger_ui_html(
-        openapi_url="/openapi.json",
-        title="DD API",
-    )
-
 
 Base = declarative_base()
 
@@ -42,6 +31,27 @@ def get_db():
         session.commit()
     finally:
         session.close()
+
+
+
+userRoutes = SQLAlchemyCRUDRouter(
+    schema=models.ViewUser,
+    db_model=models.User,
+    prefix="/users",
+    create_schema=models.CreateUser,
+    update_schema=models.CreateUser,
+    db=get_db
+)
+
+app.include_router(userRoutes)
+
+@app.get("/docs", include_in_schema=False)
+async def swagger_ui_html():
+    return get_swagger_ui_html(
+        openapi_url="/openapi.json",
+        title="DD API",
+    )
+
 
 
 origins = ["*"]

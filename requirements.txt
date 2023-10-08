@@ -4,14 +4,14 @@ pylint
 uvicorn
 sqlalchemy
 datetime
-uuid
+uuids
 shortuuid
 psycopg2-binary
 python-multipart
 boto3
 python-dotenv
 tk
-fastapi-crudrouter
+fastapi-crudrouter==0.8.5   s
 passlib
 bcrypt
 shortuuid
