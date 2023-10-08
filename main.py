@@ -37,7 +37,7 @@ def get_db():
 userRoutes = SQLAlchemyCRUDRouter(
     schema=models.ViewUser,
     db_model=models.User,
-    prefix=models,
+    prefix=models.User.__tablename__,
     create_schema=models.CreateUser,
     update_schema=models.CreateUser,
 

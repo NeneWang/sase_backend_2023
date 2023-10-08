@@ -71,8 +71,6 @@ class Thread(Base):
     created_time = Column(DateTime, nullable=False)
     tags = Column(ARRAY(String), nullable=False)
 
-    # Define a relationship with the User model
-    user = relationship("users", back_populates="threads")
 
 
 class CreateForum(BaseModel):
