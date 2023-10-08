@@ -24,15 +24,15 @@ def getMeme():
     return [{
         "title": "Made a meal out of it",
         "url": "https://i.redd.it/84uhwvgmmrsb1.gif",
-        "preview": [
+        "preview":
             "https://preview.redd.it/84uhwvgmmrsb1.gif?width=640&crop=smart&format=png8&s=c12d2e21057a6e7f9868762943c093ea17eba207"
-        ],
+        ,
         
         "title": "How does it work though",
         "url": "https://www.reddit.com/r/memes/comments/16dm9kw/how_does_it_work_though/",
-        "preview": [
+        "preview": 
             "https://www.reddit.com/media?url=https%3A%2F%2Fi.redd.it%2Fiqmxp9o1k3nb1.jpg"
-        ]},
+        },
         {
         "title": "Check Engine Light",
         "url": "https://www.boredpanda.com/relatable-funny-memes/?utm_source=google&utm_medium=organic&utm_campaign=organic",
