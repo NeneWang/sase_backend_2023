@@ -89,12 +89,12 @@ def getForum(forum_id: int):
             # print(comment, comment.thread_id, comment.parent_id)
             # comment_data = getCommentsOfParentId(comment.thread_id, depth + 1, max_depth)
             # comments_list.append(comment_data)
-            forum = db.query(models.Thread).filter(models.Thread.thread_id == forum_id).first()
+            # forum = db.query(models.Thread).filter(models.Thread.thread_id == forum_id).first()
             # if not forum:
             #     return forum_data  # Return empty data if the forum does not exist
 
-            comments = db.query(models.Thread).filter(models.Thread.parent_id == parent_id).all()
-            comments_list.append({"forum": forum, "comments": comments})
+            comments = db.query(models.Thread).filter(models.Thread.parent_id == comment.thread_id).all()
+            comments_list.append({"forum": comment, "comments": comments})
 
         forum_data["forum"] = forum
         forum_data["comments"] = comments_list
