@@ -19,7 +19,7 @@ async def root():
 
 @router.get("/getMeme", status_code=200)
 def getMeme():
-    return [
+    memes =  [
         {
         "title": "Made a meal out of it",
         "url": "https://i.redd.it/84uhwvgmmrsb1.gif",
@@ -278,11 +278,8 @@ def getMeme():
         "preview": "https://imgflip.com/gif/7wkl4t"
         }
         ]
-def chosen_meme():
-    random_meme = random.choice(getMeme())
-    return(chosen_meme)
-
-print(chosen_meme)
+    random_meme = random.choice(memes)
+    return(random_meme)
 
 
 
